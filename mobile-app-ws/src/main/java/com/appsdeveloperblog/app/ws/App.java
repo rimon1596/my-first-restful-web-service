@@ -6,7 +6,7 @@ import javax.ws.rs.core.Application;
 
 /**
  * 
- * @author simonoreilly
+ * @author Simon O'Reilly
  *
  */
 

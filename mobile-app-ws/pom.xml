@@ -26,15 +26,15 @@
 			<artifactId>jaxrs-ri</artifactId>
 			<version>2.25</version>
 		</dependency>
-
+		
 		<!-- jersey dependencies... this one allows JSON to e used -->
-
 
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-moxy</artifactId>
 			<version>2.25</version>
 		</dependency>
+		
 
 		<!-- persist items to DB -->
 
@@ -80,12 +80,36 @@
 			<version>2.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.2.11</version>
+        </dependency>
+
 	</dependencies>
 
-<properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-</properties>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 
 	<build>
 		<finalName>mobile-app-ws</finalName>

@@ -29,7 +29,7 @@ public class UsersEntryPoint {
 		UserDTO userDto = new UserDTO();
 		BeanUtils.copyProperties(requestObject, userDto);
 		
-		//create new user
+		//create new user - pass to the service layer
 		UsersService userService = new UsersServiceImpl();
 		UserDTO createdUserProfile = userService.createUser(userDto);
 		
@@ -40,3 +40,4 @@ public class UsersEntryPoint {
 	}
 
 }
+   
