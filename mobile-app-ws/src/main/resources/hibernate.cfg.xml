@@ -15,5 +15,7 @@
         <property name="connection.pool_size">10</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         
+        
+        <mapping class="com.appsdeveloperblog.app.ws.io.entity.UserEntity"></mapping>
     </session-factory>
 </hibernate-configuration>
