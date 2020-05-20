@@ -1,6 +1,9 @@
 package com.appsdeveloperblog.app.ws.service.impl;
 
 import com.appsdeveloperblog.app.ws.service.UsersService;
+
+import org.hibernate.validator.cfg.context.ReturnValueConstraintMappingContext;
+
 import com.appsdeveloperblog.app.ws.exceptions.CouldNotCreateRecordException;
 import com.appsdeveloperblog.app.ws.io.dao.DAO;
 import com.appsdeveloperblog.app.ws.io.dao.impl.MySQLDAO;
@@ -35,16 +38,20 @@ public class UsersServiceImpl implements UsersService {
 
 		// Generate secure public user ID
 		String userId = userProfileUtils.generateUserId(30);
-        user.setUserId(userId);
-        
+		user.setUserId(userId);
+
 		// Generate salt
+		String salt = userProfileUtils.getSalt(30);
 
 		// Generate secure user password
+		String encryptedPassword = userProfileUtils.generateSecurePassword(user.getPassword(), salt);
+		user.setSalt(salt);
+		user.setEncryptedPassword(encryptedPassword);
 
 		// record data into a database
+		returnValue = this.saveUser(user);
 
 		// return back user profile
-
 		return returnValue;
 	}
 
@@ -66,6 +73,22 @@ public class UsersServiceImpl implements UsersService {
 		}
 
 		return userDto;
+	}
+
+	private UserDTO saveUser(UserDTO user) {
+
+		UserDTO returnValue = null;
+
+		// Connect to DB
+		try {
+			this.database.openConnection();
+			returnValue = this.database.saveUser(user);
+		} finally {
+
+			this.database.closeConnection();
+		}
+
+		return returnValue;
 	}
 
 }
