@@ -2,8 +2,6 @@ package com.appsdeveloperblog.app.ws.service.impl;
 
 import com.appsdeveloperblog.app.ws.service.UsersService;
 
-import org.hibernate.validator.cfg.context.ReturnValueConstraintMappingContext;
-
 import com.appsdeveloperblog.app.ws.exceptions.CouldNotCreateRecordException;
 import com.appsdeveloperblog.app.ws.io.dao.DAO;
 import com.appsdeveloperblog.app.ws.io.dao.impl.MySQLDAO;

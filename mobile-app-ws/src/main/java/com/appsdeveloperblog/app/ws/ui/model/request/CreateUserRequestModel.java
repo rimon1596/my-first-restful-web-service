@@ -10,7 +10,6 @@ public class CreateUserRequestModel {
 	private String email;
 	private String password;
 
-	// RETURN EMAIL
 
 	public String getFirstName() {
 		return firstName;
