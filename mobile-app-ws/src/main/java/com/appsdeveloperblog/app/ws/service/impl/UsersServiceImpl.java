@@ -2,6 +2,8 @@ package com.appsdeveloperblog.app.ws.service.impl;
 
 import com.appsdeveloperblog.app.ws.service.UsersService;
 
+import org.hibernate.HibernateException;
+
 import com.appsdeveloperblog.app.ws.exceptions.CouldNotCreateRecordException;
 import com.appsdeveloperblog.app.ws.io.dao.DAO;
 import com.appsdeveloperblog.app.ws.io.dao.impl.MySQLDAO;
@@ -65,7 +67,11 @@ public class UsersServiceImpl implements UsersService {
 		try {
 			this.database.openConnection();
 			userDto = this.database.getUserByUserName(userName);
-		} finally {
+		} catch(HibernateException exception){
+		     System.out.println("Problem creating session factory");
+		     exception.printStackTrace();
+		}
+		finally {
 
 			this.database.closeConnection();
 		}
