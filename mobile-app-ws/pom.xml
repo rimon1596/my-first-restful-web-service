@@ -104,6 +104,15 @@
 			<version>2.2.11</version>
 		</dependency>
 
+
+		<!-- C3P0 connection pools -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>5.4.17.Final</version>
+		</dependency>
+
 	</dependencies>
 
 	<properties>

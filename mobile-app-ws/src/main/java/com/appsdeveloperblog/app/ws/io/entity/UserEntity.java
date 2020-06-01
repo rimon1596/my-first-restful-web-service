@@ -16,6 +16,7 @@ public class UserEntity implements Serializable {
 	@Id
 	@GeneratedValue
 	private long id;
+	private String userId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -70,6 +71,14 @@ public class UserEntity implements Serializable {
 
 	public void setEncryptedPassword(String encryptedPassword) {
 		this.encryptedPassword = encryptedPassword;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

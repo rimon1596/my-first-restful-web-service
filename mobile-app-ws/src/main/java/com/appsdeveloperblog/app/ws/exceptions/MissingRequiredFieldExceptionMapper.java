@@ -15,7 +15,7 @@ public class MissingRequiredFieldExceptionMapper implements ExceptionMapper<Miss
 	public Response toResponse(MissingRequiredFieldException exception) {
 		
 		ErrorMessage errorMessage = new ErrorMessage(exception.getMessage(), 
-				ErrorMessages.INTERNAL_SERVER_ERROR.name(), "http://google.com");
+				ErrorMessages.MISSING_REQUIRED_FIELD.name(), "http://StackOverflow.com");
 		
 		
 		return Response.status(Response.Status.INTERNAL_SERVER_ERROR).

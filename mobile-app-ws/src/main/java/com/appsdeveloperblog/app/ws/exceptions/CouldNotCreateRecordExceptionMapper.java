@@ -16,7 +16,7 @@ public class CouldNotCreateRecordExceptionMapper implements ExceptionMapper<Coul
 	public Response toResponse(CouldNotCreateRecordException exception) {
 		
 		ErrorMessage errorMessage = new ErrorMessage(exception.getMessage(), 
-				ErrorMessages.RECORD_ALREADY_EXISTS.name(), "http://google.com");
+				ErrorMessages.RECORD_ALREADY_EXISTS.name(), "http://stackoverflow.com");
 		
 		
 		return Response.status(Response.Status.BAD_REQUEST).

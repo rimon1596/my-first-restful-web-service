@@ -5,6 +5,7 @@ import com.appsdeveloperblog.app.ws.service.UsersService;
 import org.hibernate.HibernateException;
 
 import com.appsdeveloperblog.app.ws.exceptions.CouldNotCreateRecordException;
+import com.appsdeveloperblog.app.ws.exceptions.NoRecordFoundException;
 import com.appsdeveloperblog.app.ws.io.dao.DAO;
 import com.appsdeveloperblog.app.ws.io.dao.impl.MySQLDAO;
 import com.appsdeveloperblog.app.ws.shared.dto.UserDTO;
@@ -52,6 +53,24 @@ public class UsersServiceImpl implements UsersService {
 		returnValue = this.saveUser(user);
 
 		// return back user profile
+		return returnValue;
+	}
+	
+	@Override
+	public UserDTO getUser(String id) {
+        UserDTO returnValue = null;
+        
+        try {
+        	this.database.openConnection();
+        	returnValue = this.database.getUser(id);
+        }
+        catch(Exception exception) {
+        	exception.printStackTrace();
+            throw new NoRecordFoundException(ErrorMessages.NO_RECORD_FOIND_EXCEPTION.getErrorMessage());
+        }
+        finally {
+        	this.database.closeConnection();
+        }
 		return returnValue;
 	}
 
