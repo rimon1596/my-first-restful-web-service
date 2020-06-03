@@ -31,7 +31,7 @@ public class UsersServiceImpl implements UsersService {
 		userProfileUtils.validateRequiredFields(user);
 
 		// check if the user already exists
-		UserDTO existingUser = this.getUserByUserName(user.getEmail());
+		UserDTO existingUser = this.getUserByUsername(user.getEmail());
 		if (existingUser != null) {
 
 			throw new CouldNotCreateRecordException(ErrorMessages.RECORD_ALREADY_EXISTS.name());
@@ -74,7 +74,8 @@ public class UsersServiceImpl implements UsersService {
 		return returnValue;
 	}
 
-	private UserDTO getUserByUserName(String userName) {
+	@Override
+	public UserDTO getUserByUsername(String userName) {
 
 		UserDTO userDto = null;
 

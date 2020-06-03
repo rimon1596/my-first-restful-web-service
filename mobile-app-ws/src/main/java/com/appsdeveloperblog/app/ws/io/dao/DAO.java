@@ -14,4 +14,6 @@ public interface DAO {
 
 	void closeConnection();
 
+	void updateUserProfile(UserDTO userProfile);
+
 }

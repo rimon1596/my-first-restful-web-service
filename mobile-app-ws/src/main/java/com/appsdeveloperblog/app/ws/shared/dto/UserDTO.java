@@ -16,6 +16,15 @@ public class UserDTO implements Serializable {
 	private String salt;
 	private String encryptedPassword;
 	private String userId;
+	private String accessToken;
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
 
 	public long getId() {
 		return id;

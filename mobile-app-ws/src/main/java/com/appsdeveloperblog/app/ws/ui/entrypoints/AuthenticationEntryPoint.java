@@ -6,9 +6,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.appsdeveloperblog.app.ws.service.AuthenticationService;
+import com.appsdeveloperblog.app.ws.service.impl.AuthenticationServiceImpl;
+import com.appsdeveloperblog.app.ws.shared.dto.UserDTO;
 import com.appsdeveloperblog.app.ws.ui.model.request.LoginCrendentials;
 import com.appsdeveloperblog.app.ws.ui.response.AuthenticationDetails;
-import com.sun.research.ws.wadl.Application;
 
 @Path("/authentication")
 public class AuthenticationEntryPoint {
@@ -19,6 +21,14 @@ public class AuthenticationEntryPoint {
 	public AuthenticationDetails userLogin (LoginCrendentials loginCredentials) {
 		
 		AuthenticationDetails returnValue = new AuthenticationDetails();
+		
+		AuthenticationService authService = new AuthenticationServiceImpl();
+		UserDTO authenticatedUser = authService.authenticate(loginCredentials.getUsername(), loginCredentials.getPassword());
+		
+		String accessToken = authService.issueAccessToken(authenticatedUser);
+		
+		returnValue.setId(authenticatedUser.getUserId());
+		returnValue.setToken(accessToken);
 		
 		return returnValue;
 	}
