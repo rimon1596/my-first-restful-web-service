@@ -7,5 +7,6 @@ public interface AuthenticationService {
 	
 	UserDTO authenticate(String username, String password) throws AuthenticationException;
 	String issueAccessToken(UserDTO userDto) throws AuthenticationException;
+	void resetSecurityCredentials(String password, UserDTO authenticatedUser);
 
 }
