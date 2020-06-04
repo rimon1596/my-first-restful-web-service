@@ -23,7 +23,7 @@
         <!-- number of statements that will be cached to improve performance -->
         <property name="hibernate.c3p0.max_statements">50</property>
         
-        <mapping class="com.appsdeveloperblog.app.ws.io.entity.UserEntity"></mapping>
+        <mapping class="com.simonsrestfulapp.app.ws.io.entity.UserEntity"></mapping>
         
     </session-factory>
 </hibernate-configuration>

@@ -12,9 +12,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
 
 import com.simonsrestfulapp.app.ws.io.dao.DAO;
+import com.simonsrestfulapp.app.ws.io.entity.UserEntity;
 import com.simonsrestfulapp.app.ws.shared.dto.UserDTO;
 import com.simonsrestfulapp.app.ws.utils.HibernateUtils;
-import com.simonsrestfulapp.app.ws.io.entity.*;
 
 public class MySQLDAO implements DAO {
 
@@ -108,7 +108,7 @@ public class MySQLDAO implements DAO {
 		BeanUtils.copyProperties(userProfile, userEntity);
 		
 		session.beginTransaction();
-		session.update(userProfile);
+		session.update(userEntity);
 		session.getTransaction().commit();
 		
 	}
