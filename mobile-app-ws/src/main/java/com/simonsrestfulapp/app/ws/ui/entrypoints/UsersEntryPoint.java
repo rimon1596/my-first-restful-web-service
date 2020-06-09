@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.BeanUtils;
 
+import com.simonsrestfulapp.app.ws.annotations.Secured;
 import com.simonsrestfulapp.app.ws.service.UsersService;
 import com.simonsrestfulapp.app.ws.service.impl.UsersServiceImpl;
 import com.simonsrestfulapp.app.ws.shared.dto.UserDTO;
@@ -41,6 +42,7 @@ public class UsersEntryPoint {
 	    return returnValue;	
 	}
 	
+	@Secured
 	@GET
     @Path("/{id}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

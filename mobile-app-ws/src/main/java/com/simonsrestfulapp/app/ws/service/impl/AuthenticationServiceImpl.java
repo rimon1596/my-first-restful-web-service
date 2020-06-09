@@ -43,7 +43,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	}
 
 	@Override
-	public String issueAccessToken(UserDTO userDto) throws AuthenticationException {
+	public String issueAccessToken(UserDTO userDto) throws AuthenticationException { 
 
 		String returnValue = null;
 

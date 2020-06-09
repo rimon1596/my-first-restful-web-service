@@ -24,6 +24,17 @@ public class UserEntity implements Serializable {
 	// salt is used to create the encrypted password using the real password
 	private String salt;
 	private String encryptedPassword;
+	
+	//token
+	private String accessToken;
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
 
 	public long getId() {
 		return id;
