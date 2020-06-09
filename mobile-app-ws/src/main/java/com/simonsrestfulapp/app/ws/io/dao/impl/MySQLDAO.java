@@ -1,5 +1,6 @@
 package com.simonsrestfulapp.app.ws.io.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -111,5 +112,32 @@ public class MySQLDAO implements DAO {
 		session.update(userEntity);
 		session.getTransaction().commit();
 		
+	}
+
+	@Override
+	public List<UserDTO> getUsers(int start, int limit) {
+
+		List<UserDTO> users = new ArrayList<UserDTO>();
+		
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		CriteriaQuery<UserEntity> criteria = cb.createQuery(UserEntity.class);
+		
+		//Query root always references entities
+		Root<UserEntity> userRoot = criteria.from(UserEntity.class);
+		criteria.select(userRoot);
+		
+		//fetch results from start to the limit
+		List<UserEntity> searchResults = session.createQuery(criteria)
+				.setFirstResult(start)
+				.setMaxResults(limit)
+				.getResultList();
+		
+		for (UserEntity result : searchResults) {
+			UserDTO userDto = new UserDTO();
+			BeanUtils.copyProperties(result, userDto);
+			users.add(userDto);	
+		}
+		
+		return users;
 	}
 }

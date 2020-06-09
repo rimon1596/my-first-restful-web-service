@@ -2,6 +2,9 @@ package com.simonsrestfulapp.app.ws.service.impl;
 
 import com.simonsrestfulapp.app.ws.service.UsersService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.HibernateException;
 
 import com.simonsrestfulapp.app.ws.exceptions.CouldNotCreateRecordException;
@@ -113,6 +116,21 @@ public class UsersServiceImpl implements UsersService {
 		}
 
 		return returnValue;
+	}
+
+	@Override
+	public List<UserDTO> getUsers(int start, int limit) {
+		
+		List<UserDTO> users = new ArrayList<UserDTO>();
+		try {
+			this.database.openConnection();
+			users = this.database.getUsers(start, limit);
+		}finally {
+			this.database.closeConnection();
+		}
+		
+		return users;
+		
 	}
 
 }
