@@ -7,6 +7,8 @@ import javax.ws.rs.core.Application;
 /**
  * 
  * @author Simon O'Reilly
+ * 
+ * START
  *
  */
 
