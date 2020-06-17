@@ -21,7 +21,5 @@ public class CouldNotDeleteRecordExceptionMapper implements ExceptionMapper<Coul
 				entity(errorMessage).
 				build();
 	}
-	
-	
 
 }
