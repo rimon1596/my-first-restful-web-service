@@ -148,7 +148,7 @@ public class UsersServiceImpl implements UsersService {
 
 		} finally {
 
-			// always close the connection to the DB
+			//always close the connection to the DB
 			this.database.closeConnection();
 		}
 
