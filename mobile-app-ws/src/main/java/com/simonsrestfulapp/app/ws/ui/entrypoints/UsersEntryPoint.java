@@ -21,10 +21,13 @@ import com.simonsrestfulapp.app.ws.service.impl.UsersServiceImpl;
 import com.simonsrestfulapp.app.ws.shared.dto.UserDTO;
 import com.simonsrestfulapp.app.ws.ui.model.request.CreateUserRequestModel;
 import com.simonsrestfulapp.app.ws.ui.model.response.UserProfileRest;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Path("/users")
 public class UsersEntryPoint {
-	
+
+	@Autowired
+	UsersService userService;
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -38,7 +41,6 @@ public class UsersEntryPoint {
 		BeanUtils.copyProperties(requestObject, userDto);
 		
 		//create new user - pass to the service layer
-		UsersService userService = new UsersServiceImpl();
 		UserDTO createdUserProfile = userService.createUser(userDto);
 		
 		//prepare response
@@ -54,8 +56,7 @@ public class UsersEntryPoint {
 	public UserProfileRest getUserInfo(@PathParam("id") String id) {
 		
 		UserProfileRest returnValue = null;
-		UsersServiceImpl userService = new UsersServiceImpl();
-		
+
 		UserDTO userProfile = userService.getUser(id);
 		
 		returnValue = new UserProfileRest();
@@ -69,8 +70,7 @@ public class UsersEntryPoint {
 	public List<UserProfileRest> getUsers(@DefaultValue("0") @QueryParam("start") int start, 
 			@DefaultValue("50") @QueryParam("limit") int limit){
 		
-		UsersService service = new UsersServiceImpl();
-		List<UserDTO> users = service.getUsers(start, limit);
+		List<UserDTO> users = userService.getUsers(start, limit);
 		
 	
 		//prepare return value

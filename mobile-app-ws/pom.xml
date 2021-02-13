@@ -113,6 +113,19 @@
 			<version>5.4.17.Final</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.ext/jersey-spring4 -->
+		<dependency>
+		<groupId>org.glassfish.jersey.ext</groupId>
+		<artifactId>jersey-spring4</artifactId>
+		<version>2.26</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<properties>

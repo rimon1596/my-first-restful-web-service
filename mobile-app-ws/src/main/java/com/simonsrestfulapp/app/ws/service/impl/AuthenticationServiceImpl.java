@@ -13,15 +13,17 @@ import com.simonsrestfulapp.app.ws.service.UsersService;
 import com.simonsrestfulapp.app.ws.shared.dto.UserDTO;
 import com.simonsrestfulapp.app.ws.ui.model.response.ErrorMessages;
 import com.simonsrestfulapp.app.ws.utils.UserProfileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class AuthenticationServiceImpl implements AuthenticationService {
 
+	@Autowired
+	UsersService userService;
 	DAO database;
 
 	@Override
 	public UserDTO authenticate(String username, String password) throws AuthenticationException {
 
-		UsersService userService = new UsersServiceImpl();
 		UserDTO storedUser = userService.getUserByUsername(username);
 		if (storedUser == null) {
 			throw new AuthenticationException(ErrorMessages.AUTHENTICATION_FAILED.getErrorMessage());

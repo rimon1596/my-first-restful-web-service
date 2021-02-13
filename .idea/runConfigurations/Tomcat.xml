@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Tomcat" type="TomcatRunner-By-Camtwo" factoryName="Tomcat Runner">
+    <option name="TomcatRunnerV001-Modules" value="{&quot;modules&quot;:[{&quot;context&quot;:&quot;mobile-app-ws&quot;,&quot;documentBase&quot;:&quot;$PROJECT_DIR$/mobile-app-ws&quot;,&quot;internal&quot;:true,&quot;reloadable&quot;:true}]}" />
+    <option name="TomcatRunnerV001-TomcatInstallation" value="$USER_HOME$/DOCS/Tech/apache-tomcat-9.0.34" />
+    <option name="TomcatRunnerV001-VmArgs" value="-XX:MaxPermSize=256m -Xms128m -Xmx512m -Djava.awt.headless=true" />
+    <option name="TomcatRunnerV001-PassParentEnvVars" value="true" />
+    <option name="TomcatRunnerV001-CleanTmpWork" value="false" />
+    <envs>
+      <env name="env" value="dev" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

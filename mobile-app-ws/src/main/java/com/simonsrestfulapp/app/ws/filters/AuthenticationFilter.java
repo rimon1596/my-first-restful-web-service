@@ -1,9 +1,11 @@
 package com.simonsrestfulapp.app.ws.filters;
 
-import java.io.IOException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Base64;
-import java.util.logging.Logger;
+import com.simonsrestfulapp.app.ws.annotations.Secured;
+import com.simonsrestfulapp.app.ws.service.UsersService;
+import com.simonsrestfulapp.app.ws.service.impl.UsersServiceImpl;
+import com.simonsrestfulapp.app.ws.shared.dto.UserDTO;
+import com.simonsrestfulapp.app.ws.utils.UserProfileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Priority;
 import javax.security.sasl.AuthenticationException;
@@ -12,17 +14,18 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.ext.Provider;
-
-import com.simonsrestfulapp.app.ws.annotations.Secured;
-import com.simonsrestfulapp.app.ws.service.UsersService;
-import com.simonsrestfulapp.app.ws.service.impl.UsersServiceImpl;
-import com.simonsrestfulapp.app.ws.shared.dto.UserDTO;
-import com.simonsrestfulapp.app.ws.utils.UserProfileUtils;
+import java.io.IOException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
+import java.util.logging.Logger;
 
 @Secured
 @Provider
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter{
+
+	@Autowired
+	UsersService usersService;
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -47,7 +50,6 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 		
 		
 	   //Get user profile details
-		UsersService usersService = new UsersServiceImpl();
 		UserDTO userProfile = usersService.getUser(userId);
 		
 		//Assemble Access token using two parts. One from the DB and one from http request

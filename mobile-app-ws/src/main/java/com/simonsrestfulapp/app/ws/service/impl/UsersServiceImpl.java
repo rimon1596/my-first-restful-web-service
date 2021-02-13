@@ -19,8 +19,8 @@ public class UsersServiceImpl implements UsersService {
 
 	DAO database;
 
-	public UsersServiceImpl() {
-		this.database = new MySQLDAO();
+	public UsersServiceImpl(DAO database) {
+		this.database = database;
 	}
 
 	UserProfileUtils userProfileUtils = new UserProfileUtils();
