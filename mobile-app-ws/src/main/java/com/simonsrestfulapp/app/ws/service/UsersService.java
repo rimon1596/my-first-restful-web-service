@@ -10,5 +10,7 @@ public interface UsersService {
 	 UserDTO getUser(String id);
 	 UserDTO getUserByUsername(String userName);
 	 List<UserDTO> getUsers(int start, int limit);
+	 void updateUserDetails(UserDTO storedUserDetails);
+	 void deleteUser(UserDTO storedUser);
 
 }

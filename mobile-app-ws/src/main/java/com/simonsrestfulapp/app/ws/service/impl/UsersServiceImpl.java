@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 
 import com.simonsrestfulapp.app.ws.exceptions.CouldNotCreateRecordException;
+import com.simonsrestfulapp.app.ws.exceptions.CouldNotDeleteRecordException;
 import com.simonsrestfulapp.app.ws.exceptions.NoRecordFoundException;
 import com.simonsrestfulapp.app.ws.io.dao.DAO;
 import com.simonsrestfulapp.app.ws.io.dao.impl.MySQLDAO;
@@ -58,22 +59,20 @@ public class UsersServiceImpl implements UsersService {
 		// return back user profile
 		return returnValue;
 	}
-	
+
 	@Override
 	public UserDTO getUser(String id) {
-        UserDTO returnValue = null;
-        
-        try {
-        	this.database.openConnection();
-        	returnValue = this.database.getUser(id);
-        }
-        catch(Exception exception) {
-        	exception.printStackTrace();
-            throw new NoRecordFoundException(ErrorMessages.NO_RECORD_FOIND_EXCEPTION.getErrorMessage());
-        }
-        finally {
-        	this.database.closeConnection();
-        }
+		UserDTO returnValue = null;
+
+		try {
+			this.database.openConnection();
+			returnValue = this.database.getUser(id);
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			throw new NoRecordFoundException(ErrorMessages.NO_RECORD_FOIND_EXCEPTION.getErrorMessage());
+		} finally {
+			this.database.closeConnection();
+		}
 		return returnValue;
 	}
 
@@ -90,11 +89,10 @@ public class UsersServiceImpl implements UsersService {
 		try {
 			this.database.openConnection();
 			userDto = this.database.getUserByUserName(userName);
-		} catch(HibernateException exception){
-		     System.out.println("Problem creating session factory");
-		     exception.printStackTrace();
-		}
-		finally {
+		} catch (HibernateException exception) {
+			System.out.println("Problem creating session factory");
+			exception.printStackTrace();
+		} finally {
 
 			this.database.closeConnection();
 		}
@@ -120,17 +118,63 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public List<UserDTO> getUsers(int start, int limit) {
-		
+
 		List<UserDTO> users = new ArrayList<UserDTO>();
 		try {
 			this.database.openConnection();
 			users = this.database.getUsers(start, limit);
-		}finally {
+		} finally {
 			this.database.closeConnection();
 		}
-		
+
 		return users;
-		
+
+	}
+
+	@Override
+	public void updateUserDetails(UserDTO storedUserDetails) {
+
+		try {
+
+			// open the connection to the database
+			this.database.openConnection();
+
+			// store the profile updates
+			this.database.updateUserProfile(storedUserDetails);
+
+		} catch (CouldNotCreateRecordException ce) {
+			System.out.println(ErrorMessages.COULD_NOT_UPDATE_RECORD_EXCEPTION.getErrorMessage());
+			ce.printStackTrace();
+
+		} finally {
+
+			//always close the connection to the DB
+			this.database.closeConnection();
+		}
+
+	}
+
+	@Override
+	public void deleteUser(UserDTO storedUser) {
+
+		try {
+
+			// open the connection to the database
+			this.database.openConnection();
+
+			// store the profile updates
+			this.database.deleteUserProfile(storedUser);
+
+		} catch (CouldNotDeleteRecordException de) {
+			System.out.println(ErrorMessages.COULD_NOT_DELETE_RECORD_EXCEPTION.getErrorMessage());
+			de.printStackTrace();
+
+		} finally {
+
+			// always close the connection to the DB
+			this.database.closeConnection();
+		}
+
 	}
 
 }

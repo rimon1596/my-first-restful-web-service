@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -20,6 +22,10 @@ import com.simonsrestfulapp.app.ws.service.UsersService;
 import com.simonsrestfulapp.app.ws.service.impl.UsersServiceImpl;
 import com.simonsrestfulapp.app.ws.shared.dto.UserDTO;
 import com.simonsrestfulapp.app.ws.ui.model.request.CreateUserRequestModel;
+import com.simonsrestfulapp.app.ws.ui.model.request.UpdateUserRequestModel;
+import com.simonsrestfulapp.app.ws.ui.model.response.DeleteUserProfileResponseModel;
+import com.simonsrestfulapp.app.ws.ui.model.response.RequestOperation;
+import com.simonsrestfulapp.app.ws.ui.model.response.ResponseStatus;
 import com.simonsrestfulapp.app.ws.ui.model.response.UserProfileRest;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -84,6 +90,56 @@ public class UsersEntryPoint {
 		
 		return returnValue;
 		
+	}
+	
+	@PUT
+	@Path("/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public UserProfileRest updateUserDetails(@PathParam("id") String id,
+			UpdateUserRequestModel userDetails) {
+		
+		UsersService userService = new UsersServiceImpl();
+		UserDTO storedUserDetails = userService.getUser(id);
+		
+		if(userDetails.getFirstName() != null && !userDetails.getFirstName().isEmpty()) {
+			storedUserDetails.setFirstName(userDetails.getFirstName());
+		}
+		if(userDetails.getLastName() != null && !userDetails.getLastName().isEmpty()) {
+			storedUserDetails.setLastName(userDetails.getLastName());
+		}
+		
+		
+		//update the details 
+		userService.updateUserDetails(storedUserDetails);
+		
+		//create return details
+		UserProfileRest returnValue = new UserProfileRest();
+		BeanUtils.copyProperties(storedUserDetails, returnValue);
+		
+		return returnValue;
+		
+	}
+	
+	@Secured
+	@DELETE
+	@Path("/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public DeleteUserProfileResponseModel deleteUser(@PathParam("id") String id) {
+		
+		DeleteUserProfileResponseModel returnValue = new DeleteUserProfileResponseModel();
+		returnValue.setRequestOperation(RequestOperation.DELETE);
+
+		
+		UsersService userService = new UsersServiceImpl();
+		UserDTO storedUser = userService.getUser(id);
+		
+	    userService.deleteUser(storedUser);
+	    
+	    returnValue.setResponseStatus(ResponseStatus.SUCCESS);
+					
+		return returnValue;
 	}
 
 }
