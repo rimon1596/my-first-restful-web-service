@@ -5,3 +5,5 @@ exports.snippetText =undefined;
 exports.scope = "gitignore";
 
 });
+
+.DS_Store
